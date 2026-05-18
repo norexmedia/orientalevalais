@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Orientale Valais — Épicerie Halal · Martigny</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:   #FAF7F2;
+  --cream2:  #F2EDE3;
+  --brown:   #3D2B1F;
+  --brown2:  #5C3D2E;
+  --gold:    #C8952A;
+  --gold2:   #E8B84B;
+  --green:   #2D6A4F;
+  --green2:  #40916C;
+  --green3:  #D8F3DC;
+  --red:     #B5171A;
+  --white:   #FFFFFF;
+  --gray:    #7A7068;
+  --border:  #E8E0D0;
+  --shadow:  rgba(61,43,31,0.12);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--brown);
+  font-size: 15px;
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ===== TOP BAR ===== */
+.topbar {
+  background: var(--brown);
+  color: rgba(255,255,255,0.85);
+  padding: 0.55rem 1rem;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.topbar-dot { color: var(--gold); font-size: 0.4rem; }
+.topbar-open { color: var(--gold2); font-weight: 700; }
+
+/* ===== NAV ===== */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+.nav-brand { display: flex; align-items: center; gap: 0.7rem; }
+.nav-emblem {
+  width: 42px; height: 42px;
+  background: var(--brown);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.nav-name { line-height: 1.15; }
+.nav-name .top { font-size: 0.58rem; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 1.5px; }
+.nav-name .main { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--brown); }
+.nav-name .main span { color: var(--gold); }
+.nav-cta {
+  display: flex; align-items: center; gap: 0.4rem;
+  background: var(--gold);
+  color: var(--white);
+  padding: 0.55rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem; font-weight: 700;
+  box-shadow: 0 2px 8px rgba(200,149,42,0.3);
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: var(--brown);
+  position: relative;
+  overflow: hidden;
+  padding: 3rem 1.2rem 4rem;
+  color: var(--white);
+}
+
+/* Arabic geometric pattern */
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M40 0l5 15h15L47 24l5 15-12-9-12 9 5-15L20 15h15L40 0zM0 40l5 15h15L7 64l5 15-12-9-12 9 5-15L-20 55h15L0 40zM80 40l5 15h15L87 64l5 15-12-9-12 9 5-15L60 55h15L80 40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-glow {
+  position: absolute;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(200,149,42,0.2) 0%, transparent 70%);
+  right: -80px; top: -80px;
+  pointer-events: none;
+}
+
+.hero-glow2 {
+  position: absolute;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(45,106,79,0.25) 0%, transparent 70%);
+  left: -50px; bottom: -50px;
+  pointer-events: none;
+}
+
+.hero-inner { position: relative; z-index: 2; }
+
+.hero-flags {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.flag-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.3rem 0.7rem;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+}
+
+.live-dot {
+  width: 6px; height: 6px;
+  background: var(--gold2);
+  border-radius: 50%;
+  animation: livepulse 2s infinite;
+}
+@keyframes livepulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-tag {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--white);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 3px;
+  margin-bottom: 1.2rem;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.hero h1 .accent { color: var(--gold2); font-style: italic; }
+
+.hero-desc {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+  max-width: 340px;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.btn-gold {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--gold);
+  color: var(--white);
+  padding: 0.85rem 1.4rem;
+  border-radius: 8px;
+  font-size: 0.88rem; font-weight: 700;
+  flex: 1; justify-content: center; min-width: 130px;
+  box-shadow: 0 4px 20px rgba(200,149,42,0.4);
+  transition: transform 0.2s;
+}
+.btn-gold:active { transform: scale(0.97); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  padding: 0.85rem 1.4rem;
+  border-radius: 8px;
+  font-size: 0.88rem; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.2);
+  flex: 1; justify-content: center; min-width: 130px;
+}
+
+/* Stars row */
+.hero-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.star-icons { color: var(--gold2); font-size: 0.9rem; letter-spacing: 2px; }
+.star-text { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
+.star-text strong { color: var(--white); }
+
+/* ===== MARQUEE ===== */
+.marquee-wrap {
+  background: var(--gold);
+  overflow: hidden;
+  padding: 0.65rem 0;
+}
+.marquee-track {
+  display: flex;
+  gap: 2.5rem;
+  animation: scroll 22s linear infinite;
+  width: max-content;
+}
+.marquee-item {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.76rem; font-weight: 700;
+  color: var(--white);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+.m-dot { color: rgba(255,255,255,0.4); font-size: 0.35rem; }
+@keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ===== SECTION BASE ===== */
+.section { padding: 2.5rem 1.2rem; }
+.section-alt { background: var(--cream2); }
+.section-white { background: var(--white); }
+
+.sec-label {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 700;
+  color: var(--brown); line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+.sec-sub {
+  font-size: 0.83rem; color: var(--gray); line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== HALAL BANNER ===== */
+.halal-banner {
+  background: var(--green);
+  border-radius: 14px;
+  padding: 1.5rem;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.halal-icon {
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+.halal-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.3rem; }
+.halal-desc { font-size:0.78rem; color:rgba(255,255,255,0.75); line-height:1.5; }
+
+/* ===== PRODUCT CATEGORIES ===== */
+.cat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+.cat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cat-card:active { transform: scale(0.98); }
+.cat-emoji {
+  background: var(--cream2);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  font-size: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.cat-info { padding: 0.8rem; }
+.cat-name { font-size: 0.85rem; font-weight: 700; color: var(--brown); margin-bottom: 0.2rem; line-height: 1.3; }
+.cat-brands { font-size: 0.68rem; color: var(--gray); line-height: 1.5; }
+
+/* ===== PRODUITS VEDETTES ===== */
+.products-list { display: flex; flex-direction: column; gap: 0.7rem; }
+.product-row {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.product-emoji-box {
+  width: 50px; height: 50px;
+  background: var(--cream2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+.product-info { flex: 1; }
+.product-name { font-size: 0.88rem; font-weight: 700; color: var(--brown); margin-bottom: 0.15rem; }
+.product-brand { font-size: 0.7rem; color: var(--gray); }
+.product-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--green);
+  flex-shrink: 0;
+}
+
+/* ===== SERVICES ===== */
+.services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.service-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2rem 1rem;
+  text-align: center;
+}
+.service-icon { font-size: 2rem; display: block; margin-bottom: 0.6rem; }
+.service-title { font-size: 0.82rem; font-weight: 700; color: var(--brown); margin-bottom: 0.3rem; }
+.service-text { font-size: 0.7rem; color: var(--gray); line-height: 1.5; }
+
+/* ===== RIA TRANSFERT ===== */
+.ria-card {
+  background: linear-gradient(135deg, #1a3a6b 0%, #0d2145 100%);
+  border-radius: 16px;
+  padding: 1.8rem;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.ria-card::before {
+  content: '💸';
+  position: absolute;
+  font-size: 8rem;
+  right: -2rem; bottom: -2rem;
+  opacity: 0.07; line-height: 1;
+}
+.ria-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 0.8rem;
+}
+.ria-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.ria-desc { font-size: 0.82rem; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 1.2rem; }
+.ria-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--white);
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  font-size: 0.82rem; font-weight: 700;
+}
+
+/* ===== RATING ===== */
+.rating-card {
+  background: var(--brown);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--white);
+  margin-top: 1rem;
+}
+.rating-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem; font-weight: 900;
+  color: var(--gold2); line-height: 1;
+}
+.rating-stars { font-size: 1.3rem; margin: 0.5rem 0; letter-spacing: 3px; }
+.rating-count { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+.rating-tags {
+  display: flex; justify-content: center; gap: 0.5rem;
+  margin-top: 1.2rem; flex-wrap: wrap;
+}
+.rtag {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.3rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.7rem; font-weight: 600;
+}
+
+/* ===== LOCATION ===== */
+.location-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+.map-visual {
+  background: linear-gradient(160deg, var(--green3) 0%, #b7e4c7 100%);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  position: relative;
+  min-height: 170px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 0.4rem;
+}
+.map-grid-lines {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(45,106,79,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,106,79,0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.map-mountain {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  font-size: 3rem; line-height: 1;
+  opacity: 0.15;
+  text-align: center;
+  filter: blur(1px);
+}
+.map-pin-anim { font-size: 3.5rem; position: relative; z-index: 2; animation: mapbounce 2.5s infinite; }
+@keyframes mapbounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.map-city { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--green); position:relative; z-index:2; }
+.map-address { font-size:0.75rem; color:var(--gray); position:relative; z-index:2; }
+.map-swiss { font-size:1.5rem; position:relative; z-index:2; }
+
+.loc-info { padding: 1.2rem; }
+.loc-row {
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.loc-row:last-child { border-bottom: none; }
+.loc-icon {
+  width: 36px; height: 36px;
+  background: var(--cream2);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+.loc-label { font-size: 0.63rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gray); margin-bottom: 0.15rem; }
+.loc-value { font-size: 0.88rem; font-weight: 600; color: var(--brown); line-height: 1.5; }
+
+.hours-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+  margin-top: 0.8rem;
+}
+.hour-cell {
+  background: var(--cream2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.2rem;
+  text-align: center;
+}
+.hour-cell.today { background: var(--green3); border-color: var(--green2); }
+.hday { font-size: 0.55rem; font-weight: 700; text-transform: uppercase; color: var(--gray); display: block; margin-bottom: 0.2rem; }
+.hour-cell.today .hday { color: var(--green); }
+.htime { font-size: 0.55rem; font-weight: 600; color: var(--brown); }
+
+.map-open-btn {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  background: var(--green);
+  color: var(--white);
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 0.88rem; font-weight: 700;
+  margin-top: 1rem;
+  box-shadow: 0 3px 12px rgba(45,106,79,0.3);
+}
+
+/* ===== CTA ===== */
+.cta-section {
+  background: var(--gold);
+  padding: 2rem 1.2rem;
+  text-align: center;
+}
+.cta-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.cta-section p { font-size: 0.82rem; color: rgba(255,255,255,0.8); margin-bottom: 1.2rem; }
+.cta-tel {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--white);
+  color: var(--gold);
+  padding: 0.9rem 2rem;
+  border-radius: 10px;
+  font-size: 0.95rem; font-weight: 800;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  width: 100%; max-width: 300px;
+  justify-content: center;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--brown);
+  color: rgba(255,255,255,0.7);
+  padding: 2rem 1.2rem 6rem;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--white); margin-bottom: 0.4rem;
+}
+.footer-logo span { color: var(--gold2); font-style: italic; }
+.footer-desc { font-size: 0.78rem; line-height: 1.7; margin-bottom: 1.2rem; color: rgba(255,255,255,0.45); }
+.footer-links { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+.footer-links a { font-size: 0.8rem; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 0.5rem; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1rem;
+  font-size: 0.7rem; color: rgba(255,255,255,0.2);
+}
+.footer-bottom span { color: var(--gold2); }
+
+/* ===== FLOAT BUTTONS ===== */
+.float-btns {
+  position: fixed; bottom: 1.2rem; left: 50%; transform: translateX(-50%);
+  z-index: 300;
+  display: flex; gap: 0.7rem;
+  width: calc(100% - 2.4rem); max-width: 420px;
+}
+.fbtn {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center; gap: 0.45rem;
+  padding: 0.9rem;
+  border-radius: 12px;
+  font-size: 0.88rem; font-weight: 800;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.fbtn-call { background: var(--gold); color: var(--white); }
+.fbtn-wa { background: #25D366; color: var(--white); }
+
+/* ===== RESPONSIVE ===== */
+@media(min-width:600px){
+  .hero{padding:4rem 2rem 5rem;}
+  .cat-grid{grid-template-columns:repeat(3,1fr);}
+  .services-grid{grid-template-columns:repeat(4,1fr);}
+  .section{padding:3.5rem 2rem;}
+}
+@media(min-width:900px){
+  .cat-grid{grid-template-columns:repeat(4,1fr);}
+  .section{padding:4rem 3rem;}
+  nav{padding:1rem 3rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span class="topbar-open">🟢 Ouvert</span>
+  <span class="topbar-dot">◆</span>
+  <span>Ferme à 19h00</span>
+  <span class="topbar-dot">◆</span>
+  <span>📍 Martigny, Valais 🇨🇭</span>
+  <span class="topbar-dot">◆</span>
+  <span>✅ 100% Halal</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-emblem">🕌</div>
+    <div class="nav-name">
+      <div class="top">Épicerie Halal</div>
+      <div class="main">Orientale <span>Valais</span></div>
+    </div>
+  </div>
+  <a href="tel:+41765867640" class="nav-cta">📞 Appeler</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-flags">
+      <div class="flag-pill"><span class="live-dot"></span>Ouvert maintenant</div>
+      <div class="flag-pill">🇨🇭 Martigny</div>
+    </div>
+    <div class="hero-tag">Épicerie · Halal · Valais</div>
+    <h1>
+      Saveurs <span class="accent">Orientales</span><br>
+      au Cœur du Valais
+    </h1>
+    <p class="hero-desc">
+      Produits halal frais, épices authentiques, couscous, olives, fromages orientaux — tout ce dont votre famille a besoin, réuni en un seul endroit.
+    </p>
+    <div class="hero-actions">
+      <a href="#produits" class="btn-gold">🧺 Nos Produits</a>
+      <a href="#localisation" class="btn-ghost">📍 Nous trouver</a>
+    </div>
+    <div class="hero-stars">
+      <span class="star-icons">★★★★★</span>
+      <span class="star-text"><strong>4.9/5</strong> · 20 avis Google</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">🫒 Olives fraîches <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🌾 Couscous DARI <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🧀 Fromage Gazi <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🥫 Hummus Chtaura <span class="m-dot">◆</span></span>
+    <span class="marquee-item">☕ Café Haseeb <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🌿 Épices ABIDO <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🧈 Ghee Khanum <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🌾 Boulgour Tat <span class="m-dot">◆</span></span>
+    <span class="marquee-item">💸 RIA Transfert <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🫒 Olives fraîches <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🌾 Couscous DARI <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🧀 Fromage Gazi <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🥫 Hummus Chtaura <span class="m-dot">◆</span></span>
+    <span class="marquee-item">☕ Café Haseeb <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🌿 Épices ABIDO <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🧈 Ghee Khanum <span class="m-dot">◆</span></span>
+    <span class="marquee-item">🌾 Boulgour Tat <span class="m-dot">◆</span></span>
+    <span class="marquee-item">💸 RIA Transfert <span class="m-dot">◆</span></span>
+  </div>
+</div>
+
+<!-- HALAL + PRODUITS -->
+<section class="section section-white" id="produits">
+  <div class="sec-label">✅ Notre Engagement</div>
+  <h2 class="sec-title">Qualité Halal<br>Garantie</h2>
+
+  <div class="halal-banner">
+    <div class="halal-icon">☪️</div>
+    <div>
+      <div class="halal-title">100% Certifié Halal</div>
+      <div class="halal-desc">Tous nos produits alimentaires sont sélectionnés selon les normes halal les plus strictes pour votre tranquillité.</div>
+    </div>
+  </div>
+
+  <!-- PRODUCT LIST with real products from photos -->
+  <div class="products-list">
+    <div class="product-row">
+      <div class="product-emoji-box">🫒</div>
+      <div class="product-info">
+        <div class="product-name">Olives fraîches — vertes & noires</div>
+        <div class="product-brand">Vrac · Avec piment frais</div>
+      </div>
+      <div class="product-price">Prix en boutique</div>
+    </div>
+    <div class="product-row">
+      <div class="product-emoji-box">🌾</div>
+      <div class="product-info">
+        <div class="product-name">Couscous DARI</div>
+        <div class="product-brand">Qualité Premium · Fin & Moyen</div>
+      </div>
+      <div class="product-price">CHF 2.95</div>
+    </div>
+    <div class="product-row">
+      <div class="product-emoji-box">🥫</div>
+      <div class="product-info">
+        <div class="product-name">Hummus bi Tahina</div>
+        <div class="product-brand">Chtaura · 380g</div>
+      </div>
+      <div class="product-price">CHF 1.95</div>
+    </div>
+    <div class="product-row">
+      <div class="product-emoji-box">🧀</div>
+      <div class="product-info">
+        <div class="product-name">Fromage Gazi Beyaz Peynir</div>
+        <div class="product-brand">Traditional Salad Cheese · 55%</div>
+      </div>
+      <div class="product-price">Prix en boutique</div>
+    </div>
+    <div class="product-row">
+      <div class="product-emoji-box">☕</div>
+      <div class="product-info">
+        <div class="product-name">Café Haseeb</div>
+        <div class="product-brand">Super Extra Cardamome · Hararri</div>
+      </div>
+      <div class="product-price">Prix en boutique</div>
+    </div>
+    <div class="product-row">
+      <div class="product-emoji-box">🌿</div>
+      <div class="product-info">
+        <div class="product-name">Épices ABIDO Spices</div>
+        <div class="product-brand">Large gamme · Authentiques</div>
+      </div>
+      <div class="product-price">dès CHF 0.95</div>
+    </div>
+    <div class="product-row">
+      <div class="product-emoji-box">🧈</div>
+      <div class="product-info">
+        <div class="product-name">Ghee Khanum · 1kg</div>
+        <div class="product-brand">Beurre clarifié authentique</div>
+      </div>
+      <div class="product-price">Prix en boutique</div>
+    </div>
+    <div class="product-row">
+      <div class="product-emoji-box">🌾</div>
+      <div class="product-info">
+        <div class="product-name">Boulgour Tat · 1kg</div>
+        <div class="product-brand">Pilavlik Bulgur · Coarse</div>
+      </div>
+      <div class="product-price">Prix en boutique</div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section section-alt" id="categories">
+  <div class="sec-label">🧺 Assortiment</div>
+  <h2 class="sec-title">Tout Pour Votre<br>Cuisine Orientale</h2>
+  <p class="sec-sub">Une sélection soignée de produits venant du monde arabe, turc et méditerranéen.</p>
+  <div class="cat-grid">
+    <div class="cat-card">
+      <div class="cat-emoji">🫒</div>
+      <div class="cat-info">
+        <div class="cat-name">Olives & Huiles</div>
+        <div class="cat-brands">Vrac frais · Rayan Olive Oil</div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-emoji">🌾</div>
+      <div class="cat-info">
+        <div class="cat-name">Céréales & Légumes</div>
+        <div class="cat-brands">DARI · Tat Bulgur · Semoule</div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-emoji">🌿</div>
+      <div class="cat-info">
+        <div class="cat-name">Épices & Herbes</div>
+        <div class="cat-brands">ABIDO · Abido · Mlou­khieh</div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-emoji">🧀</div>
+      <div class="cat-info">
+        <div class="cat-name">Fromages Orientaux</div>
+        <div class="cat-brands">Gazi · Erzurum · Feta</div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-emoji">🥫</div>
+      <div class="cat-info">
+        <div class="cat-name">Conserves & Tahina</div>
+        <div class="cat-brands">Chtaura · Hummus · Tahina</div>
+      </div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-emoji">☕</div>
+      <div class="cat-info">
+        <div class="cat-name">Café & Boissons</div>
+        <div class="cat-brands">Haseeb Coffee · POMS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section section-white">
+  <div class="sec-label">🤝 Nos Services</div>
+  <h2 class="sec-title">Plus Qu'une<br>Épicerie</h2>
+  <p class="sec-sub">Nous sommes là pour toute la communauté du Valais.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">✅</span>
+      <div class="service-title">100% Halal</div>
+      <p class="service-text">Produits sélectionnés selon les normes halal</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🌍</span>
+      <div class="service-title">Produits du Monde</div>
+      <p class="service-text">Maroc, Turquie, Liban, Syrie et plus</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🤝</span>
+      <div class="service-title">Service Familial</div>
+      <p class="service-text">Accueil chaleureux en arabe & français</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💸</span>
+      <div class="service-title">RIA Transfert</div>
+      <p class="service-text">Envoi d'argent international rapide</p>
+    </div>
+  </div>
+
+  <!-- RIA CARD -->
+  <div style="margin-top:1rem;">
+    <div class="ria-card">
+      <div class="ria-badge">💸 Service disponible en boutique</div>
+      <div class="ria-title">RIA Money Transfer</div>
+      <div class="ria-desc">Envoyez de l'argent vers le Maroc, l'Algérie, la Tunisie et plus de 160 pays rapidement et en toute sécurité. Venez nous voir en boutique!</div>
+      <a href="tel:+41765867640" class="ria-btn">📞 Renseignements</a>
+    </div>
+  </div>
+</section>
+
+<!-- RATING + LOCALISATION -->
+<section class="section section-alt" id="localisation">
+  <div class="sec-label">📍 Nous Trouver</div>
+  <h2 class="sec-title">Votre Épicerie à<br>Martigny</h2>
+
+  <div class="location-card">
+    <div class="map-visual">
+      <div class="map-grid-lines"></div>
+      <div class="map-mountain">🏔️</div>
+      <span class="map-pin-anim">📍</span>
+      <span class="map-swiss">🇨🇭</span>
+      <div class="map-city">Martigny · Valais</div>
+      <div class="map-address">Rue Marc Morand 9, 1920</div>
+    </div>
+    <div class="loc-info">
+      <div class="loc-row">
+        <div class="loc-icon">📍</div>
+        <div>
+          <div class="loc-label">Adresse</div>
+          <div class="loc-value">Rue Marc Morand 9<br>1920 Martigny, Suisse</div>
+        </div>
+      </div>
+      <div class="loc-row">
+        <div class="loc-icon">📞</div>
+        <div>
+          <div class="loc-label">Téléphone</div>
+          <div class="loc-value">+41 76 586 76 40</div>
+        </div>
+      </div>
+      <div class="loc-row">
+        <div class="loc-icon">🕐</div>
+        <div>
+          <div class="loc-label">Horaires</div>
+          <div class="loc-value">Tous les jours · 09h00 – 19h00</div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:0 1.2rem;">
+      <div class="hours-row">
+        <div class="hour-cell"><span class="hday">Lu</span><span class="htime">9-19</span></div>
+        <div class="hour-cell"><span class="hday">Ma</span><span class="htime">9-19</span></div>
+        <div class="hour-cell"><span class="hday">Me</span><span class="htime">9-19</span></div>
+        <div class="hour-cell"><span class="hday">Je</span><span class="htime">9-19</span></div>
+        <div class="hour-cell"><span class="hday">Ve</span><span class="htime">9-19</span></div>
+        <div class="hour-cell today"><span class="hday">Sa</span><span class="htime">9-19</span></div>
+        <div class="hour-cell"><span class="hday">Di</span><span class="htime">9-19</span></div>
+      </div>
+    </div>
+    <div style="padding:1rem 1.2rem 1.2rem;">
+      <a href="https://maps.google.com/?q=Rue+Marc+Morand+9,+1920+Martigny" target="_blank" class="map-open-btn">
+        🗺️ Ouvrir dans Google Maps
+      </a>
+    </div>
+  </div>
+
+  <div class="rating-card">
+    <div class="rating-num">4.9</div>
+    <div class="rating-stars">★★★★★</div>
+    <div class="rating-count">Basé sur 20 avis Google</div>
+    <div class="rating-tags">
+      <span class="rtag">🇲🇦 Produits Halal</span>
+      <span class="rtag">🇨🇭 Martigny</span>
+      <span class="rtag">💸 RIA Transfer</span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h3>Une question?<br>Appelez-nous!</h3>
+  <p>Nous vous accueillons tous les jours de 9h à 19h</p>
+  <a href="tel:+41765867640" class="cta-tel">📞 +41 76 586 76 40</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Orientale <span>Valais</span></div>
+  <p class="footer-desc">Votre épicerie halal de confiance à Martigny · Produits authentiques du monde arabe, turc et méditerranéen · Service RIA Money Transfer</p>
+  <div class="footer-links">
+    <a href="tel:+41765867640">📞 +41 76 586 76 40</a>
+    <a href="#">📍 Rue Marc Morand 9, 1920 Martigny</a>
+    <a href="#">🕐 Lun–Dim: 09:00 – 19:00</a>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Orientale Valais Épicerie Halal · Martigny</div>
+    <div style="margin-top:0.3rem;">Site créé par <span>Norex Media</span> 🇲🇦</div>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<div class="float-btns">
+  <a href="tel:+41765867640" class="fbtn fbtn-call">📞 Appeler</a>
+  <a href="https://wa.me/41765867640" class="fbtn fbtn-wa">💬 WhatsApp</a>
+</div>
+
+</body>
+</html>
